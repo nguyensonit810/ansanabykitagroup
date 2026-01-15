@@ -1,0 +1,30 @@
+
+HƯỚNG DẪN CÀI ĐẶT HỆ THỐNG THU LEAD GOOGLE SHEETS
+--------------------------------------------------
+
+Bước 1: Tạo Google Sheet
+1. Truy cập sheets.google.com và tạo một trang tính mới.
+2. Đặt tên file là "Ansana Leads".
+3. Đổi tên tab (Sheet1) thành "Leads".
+
+Bước 2: Dán Code Apps Script
+1. Tại Google Sheet, chọn menu "Tiện ích mở rộng" (Extensions) -> "Apps Script".
+2. Xóa toàn bộ code mặc định trong file `Code.gs`.
+3. Copy toàn bộ nội dung file `backend/google-apps-script.gs` và dán vào.
+4. Nhấn nút "Lưu" (biểu tượng đĩa mềm) và đặt tên dự án là "Ansana Backend".
+
+Bước 3: Triển khai Web App (QUAN TRỌNG)
+1. Nhấn nút "Triển khai" (Deploy) ở góc phải -> "Triển khai mới" (New deployment).
+2. Chọn loại cấu hình là "Ứng dụng web" (Web App).
+3. Tại phần "Người có quyền truy cập" (Who has access), bạn PHẢI chọn: "Mọi người" (Anyone).
+4. Nhấn "Triển khai". Google sẽ hỏi cấp quyền, hãy chọn Email của bạn -> Advanced -> Go to Ansana Backend (unsafe) -> Allow.
+5. Sau khi xong, Google sẽ cung cấp một "URL ứng dụng web". Hãy copy URL này.
+
+Bước 4: Kết nối Frontend
+1. Mở file `components/LeadForm.tsx` trong bộ mã nguồn React.
+2. Tìm dòng `const GAS_WEBAPP_URL = '...';`
+3. Thay thế URL bên trong bằng URL bạn vừa copy ở Bước 3.
+
+Lưu ý bảo mật:
+- Khi dùng Fetch API với `mode: 'no-cors'`, trình duyệt sẽ không thể đọc phản hồi JSON từ Google nhưng dữ liệu VẪN được gửi thành công vào Sheet. Code React đã được tối ưu để xử lý trường hợp này.
+- Số điện thoại đã được kiểm tra định dạng Việt Nam trước khi gửi để lọc rác.
