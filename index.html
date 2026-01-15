@@ -15,7 +15,7 @@
     <meta property="og:url" content="https://ansana.bykita.vn/">
     <meta property="og:title" content="Ansana by KITA – Tuyệt Tác Căn Hộ Wellness Mặt Tiền Võ Văn Kiệt">
     <meta property="og:description" content="Chỉ từ 3,6 tỷ/căn sở hữu ngay tuyệt phẩm căn hộ xanh Kita Võ Văn Kiệt. Pháp lý hoàn thiện, chủ đầu tư Kita Group uy tín.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1545324418-f1d3ac1ef739?q=80&w=1935">
+    <meta property="og:image" content="https://raw.githubusercontent.com/nguyensonit810/ansanabykitagroup/main/phoi-canh-du-an-can-ho-stella-vo-van-kiet-binh-tan.png">
 
     <!-- CSS & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,7 +28,7 @@
             --amber-600: #d97706;
             --gold-light: #fbbf24;
         }
-        body { font-family: 'Inter', sans-serif; }
+        body { font-family: 'Inter', sans-serif; overflow-x: hidden; }
         h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
         .bg-luxury { background-color: var(--emerald-900); }
         .text-gold { color: var(--amber-600); }
@@ -38,8 +38,6 @@
         
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        
-        .list-gold li::before { content: '✦'; color: var(--amber-600); margin-right: 10px; font-weight: bold; }
         
         .internal-link { position: relative; }
         .internal-link::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--amber-600); transition: width 0.3s; }
@@ -85,32 +83,36 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 120px;
+            width: 140px;
             text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
         }
+        .node:hover { transform: scale(1.1) translateY(-10px); z-index: 20; }
         .node-img {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             overflow: hidden;
-            border: 2px solid #d97706;
+            border: 3px solid #d97706;
             margin-bottom: 8px;
             background: white;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: relative;
         }
         .node-img img { width: 100%; height: 100%; object-fit: cover; }
-        .node-info { background: white; padding: 4px 10px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; }
-        .node-time { font-size: 10px; font-weight: 800; color: #d97706; text-transform: uppercase; }
-        .node-name { font-size: 11px; font-weight: 700; color: #064e3b; line-height: 1.1; }
+        .node-info { background: white; padding: 6px 14px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #f1f5f9; width: max-content; }
+        .node-time { font-size: 11px; font-weight: 800; color: #d97706; text-transform: uppercase; margin-bottom: 1px; }
+        .node-name { font-size: 12px; font-weight: 700; color: #064e3b; line-height: 1.1; white-space: nowrap; }
 
         @media (max-width: 640px) {
             .connectivity-map { aspect-ratio: auto; height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; padding: 20px; }
             .orbit, .center-logo { display: none; }
             .node { position: static; width: auto; flex-direction: row; text-align: left; gap: 10px; }
             .node-img { width: 50px; height: 50px; margin-bottom: 0; flex-shrink: 0; }
+            .node-info { border-radius: 8px; }
         }
 
-        /* Perspective Marker Style */
         .marker-tag {
             background: rgba(6, 78, 59, 0.9);
             color: white;
@@ -124,13 +126,14 @@
             white-space: nowrap;
         }
 
-        /* Custom Play Button Pulse Animation */
         @keyframes pulse-gold {
             0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0.7); }
             70% { transform: scale(1.05); box-shadow: 0 0 0 20px rgba(217, 119, 6, 0); }
             100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(217, 119, 6, 0); }
         }
         .play-btn-pulse { animation: pulse-gold 2s infinite; }
+
+        #hero-parallax-bg { will-change: transform; }
     </style>
 <script type="importmap">
 {
@@ -153,6 +156,7 @@
             <div class="hidden lg:flex space-x-8 text-[11px] font-bold uppercase tracking-widest text-slate-600">
                 <a href="#overview" class="internal-link hover:text-amber-600 transition-colors">Tổng quan</a>
                 <a href="#location" class="internal-link hover:text-amber-600 transition-colors">Vị trí</a>
+                <a href="#perspective" class="internal-link hover:text-amber-600 transition-colors">Kiến trúc</a>
                 <a href="#amenities" class="internal-link hover:text-amber-600 transition-colors">Tiện ích</a>
                 <a href="#video-presentation" class="internal-link hover:text-amber-600 transition-colors">Video Phim</a>
                 <a href="#price" class="internal-link hover:text-amber-600 transition-colors">Báo giá 2026</a>
@@ -164,12 +168,13 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION WITH PARALLAX -->
     <section class="relative h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div class="absolute inset-0 bg-emerald-900">
+        <div id="hero-parallax-bg" class="absolute inset-x-0 -top-20 h-[120vh] bg-emerald-900 z-0">
             <img src="https://images.unsplash.com/photo-1545324418-f1d3ac1ef739?q=80&w=1935" class="w-full h-full object-cover opacity-40" alt="Phối cảnh chính thức dự án Ansana by Kita mặt tiền Võ Văn Kiệt">
             <div class="absolute inset-0 gradient-dark"></div>
         </div>
+
         <div class="relative z-10 text-center text-white px-4 max-w-5xl">
             <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif font-black mb-8 leading-[1.1] drop-shadow-2xl uppercase">
                 Ansana by KITA <br> <span class="text-amber-500">Tuyệt Tác Mặt Tiền Võ Văn Kiệt</span>
@@ -184,7 +189,7 @@
         </div>
     </section>
 
-    <!-- PERSPECTIVE (3D VIEW) -->
+    <!-- PERSPECTIVE (3D VIEW) - UPDATED WITH GITHUB IMAGE AND RICH CONTENT -->
     <section id="perspective" class="py-24 bg-slate-50 reveal">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
@@ -193,21 +198,44 @@
                 <div class="w-20 h-1 bg-amber-600 mx-auto mt-6"></div>
             </div>
 
-            <div class="relative rounded-[40px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] border-8 border-white group">
-                <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?q=80&w=1859" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-[10000ms]" alt="Phối cảnh 3D dự án Ansana by Kita mặt tiền Võ Văn Kiệt với 4 block cao tầng">
-                <div class="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-all"></div>
-                <div class="hidden md:block">
-                    <div class="absolute top-[20%] left-[10%] marker-tag">Bệnh viện CIH</div>
-                    <div class="absolute top-[15%] left-[20%] marker-tag">AEON Mall Bình Tân</div>
-                    <div class="absolute top-[10%] left-[40%] marker-tag">Bến xe Miền Tây</div>
-                    <div class="absolute top-[5%] left-[55%] marker-tag">Chợ Lớn</div>
-                    <div class="absolute top-[2%] left-[65%] marker-tag">Thủ Thiêm</div>
-                    <div class="absolute top-[8%] right-[10%] marker-tag">Phú Mỹ Hưng</div>
-                    <div class="absolute bottom-[20%] left-[10%] bg-blue-600 text-white px-4 py-1 font-bold text-xs rounded-full shadow-lg transform -rotate-12">Đại lộ Võ Văn Kiệt</div>
-                    
-                    <div class="absolute top-[40%] right-[20%] border-4 border-gold-light p-6 bg-emerald-900/60 backdrop-blur-md rounded-2xl animate-pulse">
-                        <p class="text-white font-black text-2xl tracking-tighter uppercase">ANSANA BY KITA</p>
-                        <div class="text-[10px] text-gold-light font-bold tracking-widest mt-1">QUY MÔ 4 BLOCK - 24 TẦNG</div>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-8">
+                    <div class="relative rounded-[40px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)] border-8 border-white group">
+                        <!-- Updated Image Link to GitHub Raw for guaranteed rendering -->
+                        <img src="https://raw.githubusercontent.com/nguyensonit810/ansanabykitagroup/main/phoi-canh-du-an-can-ho-stella-vo-van-kiet-binh-tan.png" class="w-full h-auto transform group-hover:scale-105 transition-transform duration-[10000ms]" alt="Phối cảnh toàn cảnh dự án Ansana by Kita mặt tiền Võ Văn Kiệt">
+                        <div class="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-all"></div>
+                        <div class="hidden md:block">
+                            <div class="absolute top-[20%] left-[10%] marker-tag">Block A - Emerald</div>
+                            <div class="absolute top-[15%] right-[20%] marker-tag">Block B - Amber</div>
+                            <div class="absolute bottom-[20%] left-[15%] bg-blue-600 text-white px-4 py-1 font-bold text-xs rounded-full shadow-lg transform -rotate-12">Đại lộ Võ Văn Kiệt</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
+                        <h3 class="text-2xl font-serif font-bold text-emerald-900 mb-4">Biểu Tượng Mới Phía Tây</h3>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                            <strong>Ansana by Kita</strong> không chỉ là một dự án căn hộ, mà là một biểu tượng kiến trúc hiện đại với quy mô 4 block vươn cao 24 tầng giữa lòng đại lộ Võ Văn Kiệt. 
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start space-x-3">
+                                <span class="text-amber-500 font-bold">✦</span>
+                                <p class="text-xs text-slate-700"><strong>Kiến trúc Wellness:</strong> Thiết kế tối ưu ánh sáng tự nhiên và đối lưu không khí tươi.</p>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-amber-500 font-bold">✦</span>
+                                <p class="text-xs text-slate-700"><strong>Hệ sinh thái xanh:</strong> Mật độ xây dựng thấp, ưu tiên không gian cho vườn treo và công viên nội khu.</p>
+                            </li>
+                            <li class="flex items-start space-x-3">
+                                <span class="text-amber-500 font-bold">✦</span>
+                                <p class="text-xs text-slate-700"><strong>Smart Building:</strong> Tích hợp công nghệ 4.0 trong quản lý vận hành và an ninh đa lớp.</p>
+                            </li>
+                        </ul>
+                        <div class="mt-8 pt-8 border-t border-slate-100">
+                            <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Quy mô dự án</p>
+                            <p class="text-xl font-serif font-black text-emerald-900 mt-1">2.43 Hecta | 4 Block | 1.000+ Căn hộ</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -220,376 +248,31 @@
 
     <!-- LOCATION SECTION -->
     <section id="location" class="py-24 bg-white reveal">
-        <div class="max-w-7xl mx-auto px-4 text-center mb-16">
-            <span class="text-amber-600 font-bold uppercase tracking-[0.3em] text-xs">Vị trí liên kết</span>
-            <h2 class="text-4xl font-serif font-bold text-emerald-900 mt-2 uppercase">Liên kết vùng tâm điểm</h2>
-            <div class="w-20 h-1 bg-amber-600 mx-auto mt-6"></div>
-        </div>
-
-        <div class="relative py-20 overflow-hidden">
-            <div class="connectivity-map">
-                <div class="orbit"></div>
-                <div class="center-logo">
-                    <span class="text-6xl font-serif font-black text-amber-500 leading-none">A</span>
-                    <span class="text-sm font-bold text-white tracking-[0.5em] mt-2 uppercase">ANSANA</span>
-                </div>
-                <!-- Nodes -->
-                <div class="node" style="top: 0%; left: 15%;">
-                    <div class="node-img"><img src="https://images.unsplash.com/photo-1436491865332-7a61a109c0f2?q=80&w=200" alt="Sân bay Tân Sơn Nhất"></div>
-                    <div class="node-info"><p class="node-time">25 Phút</p><p class="node-name">Sân bay TÂN SƠN NHẤT</p></div>
-                </div>
-                <div class="node" style="top: -10%; left: 50%; transform: translateX(-50%);">
-                    <div class="node-img"><img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=200" alt="Bến xe Miền Tây"></div>
-                    <div class="node-info"><p class="node-time">05 Phút</p><p class="node-name">BẾN XE MIỀN TÂY</p></div>
-                </div>
-                <div class="node" style="top: 0%; right: 15%;">
-                    <div class="node-img"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=200" alt="Bệnh viện Triều An"></div>
-                    <div class="node-info"><p class="node-time">10 Phút</p><p class="node-name">Bệnh viện TRIỀU AN</p></div>
-                </div>
-                <div class="node" style="top: 50%; right: -5%; transform: translateY(-50%);">
-                    <div class="node-img"><img src="https://images.unsplash.com/photo-1467803738586-46b7eb7b16a1?q=80&w=200" alt="Công viên Bình Phú"></div>
-                    <div class="node-info"><p class="node-time">10 Phút</p><p class="node-name">Công viên BÌNH PHÚ</p></div>
-                </div>
-                <div class="node" style="bottom: 0%; right: 15%;">
-                    <div class="node-img"><img src="https://images.unsplash.com/photo-1566367576585-051277d52997?q=80&w=200" alt="Hùng Vương Plaza"></div>
-                    <div class="node-info"><p class="node-time">10 Phút</p><p class="node-name">HÙNG VƯƠNG PLAZA</p></div>
-                </div>
-                <div class="node" style="bottom: -10%; left: 50%; transform: translateX(-50%);">
-                    <div class="node-img"><img src="https://images.unsplash.com/photo-1534452203294-49c8913721b2?q=80&w=200" alt="Siêu thị Mega"></div>
-                    <div class="node-info"><p class="node-time">10 Phút</p><p class="node-name">SIÊU THỊ MEGA</p></div>
-                </div>
-                <div class="node" style="bottom: 0%; left: 15%;">
-                    <div class="node-img"><img src="https://images.unsplash.com/photo-1582234373302-3652875f5697?q=80&w=200" alt="Chợ Lớn"></div>
-                    <div class="node-info"><p class="node-time">10 Phút</p><p class="node-name">CHỢ LỚN</p></div>
-                </div>
-                <div class="node" style="top: 50%; left: -5%; transform: translateY(-50%);">
-                    <div class="node-img"><img src="https://images.unsplash.com/photo-1529655683826-aba9b3e77383?q=80&w=200" alt="Trung tâm Quận 1"></div>
-                    <div class="node-info"><p class="node-time">15 Phút</p><p class="node-name">Trung tâm QUẬN 1</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- INTERACTIVE MAP -->
-    <section id="interactive-map" class="py-24 bg-slate-50 reveal">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 items-stretch">
-                <div class="lg:col-span-1 space-y-8 flex flex-col justify-center">
-                    <div>
-                        <span class="text-amber-600 font-bold uppercase tracking-widest text-xs">Vị trí chính xác</span>
-                        <h2 class="text-4xl font-serif font-bold text-emerald-900 mt-2 uppercase">Bản đồ thực tế <br> Ansana by Kita</h2>
-                        <div class="w-16 h-1 bg-amber-600 mt-6"></div>
-                    </div>
-                    <p class="text-slate-600 text-sm leading-relaxed">Tọa lạc ngay mặt tiền số <strong>69-79-89 Võ Văn Kiệt</strong>, Phường An Lạc, Quận Bình Tân. Dự án sở hữu tọa độ vàng <strong>10.724452, 106.616846</strong>, tâm điểm kết nối mọi hành trình.</p>
-                    <div class="space-y-4">
-                        <a href="https://www.google.com/maps/search/?api=1&query=10.724452,106.616846" target="_blank" class="flex items-center space-x-4 group">
-                            <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-md group-hover:bg-amber-600 transition-all">
-                                <span class="text-xl group-hover:scale-125 transition-transform">📍</span>
-                            </div>
-                            <span class="text-sm font-bold text-emerald-900 group-hover:text-amber-600">Xem trên Google Maps</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="lg:col-span-2 relative">
-                    <div class="w-full h-[500px] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3920.01633519842!2d106.616846!3d10.724452!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQzJzI4LjAiTiAxMDbCsDM3JzAwLjciRQ!5e0!3m2!1svi!2s!4v1710000000000!5m2!1svi!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- AMENITIES -->
-    <section id="amenities" class="py-24 bg-white reveal">
-        <div class="max-w-7xl mx-auto px-4 text-center mb-16">
-            <h2 class="text-4xl font-serif font-bold text-emerald-900 uppercase">Tiện ích đặc quyền</h2>
-            <p class="text-slate-500 mt-4 max-w-2xl mx-auto italic">"Nơi Wellness 4.0 giao thoa cùng phong cách sống tinh hoa"</p>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="p-10 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-xl transition-all group shadow-sm">
-                <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🏊‍♂️</div>
-                <h4 class="text-xl font-bold text-emerald-900 mb-3 uppercase">Hồ bơi vô cực Skyview</h4>
-                <p class="text-sm text-slate-500 leading-relaxed">Tận hưởng làn nước mát lành và tầm nhìn Panorama không giới hạn về trung tâm thành phố.</p>
-            </div>
-            <div class="p-10 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-xl transition-all group shadow-sm">
-                <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🌳</div>
-                <h4 class="text-xl font-bold text-emerald-900 mb-3 uppercase">Sky Garden 4.0</h4>
-                <p class="text-sm text-slate-500 leading-relaxed">Hệ thống lọc khí tươi và vườn treo xanh mát mang lại sức khỏe trọn đời cho cư dân.</p>
-            </div>
-            <div class="p-10 bg-slate-50 rounded-3xl border border-slate-100 hover:shadow-xl transition-all group shadow-sm">
-                <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🛍️</div>
-                <h4 class="text-xl font-bold text-emerald-900 mb-3 uppercase">Trung tâm mua sắm</h4>
-                <p class="text-sm text-slate-500 leading-relaxed">Chuỗi thương hiệu quốc tế hội tụ ngay dưới chân nhà, đáp ứng mọi nhu cầu mua sắm.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- VIDEO SECTION - NEWLY ADDED -->
-    <section id="video-presentation" class="py-24 bg-emerald-950 text-white overflow-hidden reveal">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
-                <span class="text-amber-500 font-bold uppercase tracking-[0.3em] text-xs">Video thực tế</span>
-                <h2 class="text-4xl font-serif font-bold mt-2 uppercase">Phóng Sự Giới Thiệu Ansana by Kita</h2>
-                <div class="w-20 h-1 bg-amber-500 mx-auto mt-6"></div>
-                <p class="text-slate-400 mt-6 max-w-3xl mx-auto leading-relaxed italic">"Khám phá chuẩn sống mới tại đại lộ Võ Văn Kiệt qua những khung hình sống động nhất."</p>
+                <span class="text-amber-600 font-bold uppercase tracking-[0.3em] text-xs">Vị trí liên kết</span>
+                <h2 class="text-4xl font-serif font-bold text-emerald-900 mt-2 uppercase">Liên kết vùng tâm điểm</h2>
+                <div class="w-20 h-1 bg-amber-600 mx-auto mt-6"></div>
+                <p class="text-slate-500 mt-6 max-w-2xl mx-auto leading-relaxed">
+                    Từ <strong>Ansana by Kita</strong>, cư dân dễ dàng tiếp cận hệ thống tiện ích đẳng cấp quốc tế chỉ trong vài phút di chuyển qua đại lộ Võ Văn Kiệt thông thoáng.
+                </p>
             </div>
 
-            <div class="relative max-w-5xl mx-auto group">
-                <!-- Video Container -->
-                <div id="video-placeholder" class="relative aspect-video rounded-[32px] overflow-hidden shadow-[0_30px_100px_rgba(0,0,0,0.5)] border-4 border-white/10 cursor-pointer bg-slate-800">
-                    <!-- Placeholder Thumbnail Image -->
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069" class="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105" alt="Thumbnail video dự án Ansana by Kita">
-                    
-                    <!-- Centered Play Button -->
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <div class="w-24 h-24 bg-amber-600 rounded-full flex items-center justify-center play-btn-pulse transition-all group-hover:bg-amber-500 group-hover:scale-110 shadow-2xl">
-                            <svg class="w-10 h-10 text-white fill-current ml-1" viewBox="0 0 24 24">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
+            <div class="relative py-20 overflow-hidden">
+                <div class="connectivity-map">
+                    <div class="orbit"></div>
+                    <div class="center-logo">
+                        <span class="text-6xl font-serif font-black text-amber-500 leading-none">A</span>
+                        <span class="text-sm font-bold text-white tracking-[0.5em] mt-2 uppercase">ANSANA</span>
+                    </div>
+
+                    <div class="node" style="top: 0%; left: 15%;">
+                        <div class="node-img"><img src="https://images.unsplash.com/photo-1540339832862-4745591359af?q=80&w=200" alt="AEON Mall Bình Tân"></div>
+                        <div class="node-info">
+                            <p class="node-time">08 Phút</p>
+                            <p class="node-name">AEON MALL BÌNH TÂN</p>
                         </div>
                     </div>
 
-                    <!-- Video Description Overlay -->
-                    <div class="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-black/80 to-transparent">
-                        <p class="text-sm font-bold uppercase tracking-widest text-amber-500">Official Presentation</p>
-                        <h4 class="text-xl font-bold mt-1">Ansana by Kita - Tuyệt Tác Căn Hộ Wellness 2026</h4>
-                    </div>
-                </div>
-
-                <!-- Iframe Container (Hidden by default) -->
-                <div id="video-frame-container" class="hidden absolute inset-0 rounded-[32px] overflow-hidden bg-black z-20">
-                    <iframe id="youtube-iframe" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-            </div>
-
-            <!-- Features Highlights below video -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 max-w-5xl mx-auto text-center">
-                <div class="space-y-2">
-                    <div class="text-3xl text-amber-500 font-serif font-black italic">4.0</div>
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Công nghệ Wellness</p>
-                </div>
-                <div class="space-y-2">
-                    <div class="text-3xl text-amber-500 font-serif font-black italic">100%</div>
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Pháp lý hoàn thiện</p>
-                </div>
-                <div class="space-y-2">
-                    <div class="text-3xl text-amber-500 font-serif font-black italic">2.43</div>
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Diện tích (Hecta)</p>
-                </div>
-                <div class="space-y-2">
-                    <div class="text-3xl text-amber-500 font-serif font-black italic">2026</div>
-                    <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Năm bàn giao dự kiến</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRICING SECTION -->
-    <section id="price" class="py-24 bg-white reveal">
-        <div class="max-w-7xl mx-auto px-4 text-center mb-16">
-            <h2 class="text-4xl font-serif font-bold text-emerald-900 uppercase tracking-tight">Bảng Giá <span class="text-amber-600">Ansana by Kita</span> 2026</h2>
-            <p class="text-slate-500 mt-2">Nhận báo giá chi tiết từng tầng và chính sách chiết khấu 15% ngay hôm nay.</p>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8" id="price-cards">
-            <!-- JS Injection -->
-        </div>
-        <div class="max-w-4xl mx-auto mt-16 p-8 border border-slate-100 rounded-2xl bg-slate-50 text-center">
-            <p class="text-xl font-serif italic text-amber-600" id="data-policy"></p>
-        </div>
-    </section>
-
-    <!-- LEAD FORM -->
-    <section id="register" class="py-24 bg-slate-50">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="bg-white p-10 md:p-16 rounded-[40px] shadow-2xl border border-slate-200">
-                <div class="text-center mb-10">
-                    <h2 class="text-3xl font-serif font-bold text-emerald-900 uppercase">Liên hệ tư vấn chính thức</h2>
-                    <p class="text-slate-500 text-sm mt-2">Phòng kinh doanh dự án sẽ phản hồi trong vòng 5 phút.</p>
-                </div>
-                <form id="lead-form" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input type="text" name="name" required placeholder="Họ và tên quý khách" class="w-full px-6 py-4 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-amber-500 transition-all shadow-sm">
-                        <input type="tel" name="phone" required placeholder="Số điện thoại liên hệ" class="w-full px-6 py-4 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-amber-500 transition-all shadow-sm">
-                    </div>
-                    <select name="interest" class="w-full px-6 py-4 rounded-xl border border-slate-200 outline-none cursor-pointer shadow-sm">
-                        <option value="1PN">Căn hộ Ansana 1 Phòng Ngủ</option>
-                        <option value="2PN">Căn hộ Ansana 2 Phòng Ngủ (Phổ biến)</option>
-                        <option value="3PN">Căn hộ Ansana 3 Phòng Ngủ</option>
-                        <option value="Penthouse">Penthouse Kita Võ Văn Kiệt</option>
-                    </select>
-                    <button type="submit" id="submit-btn" class="w-full py-5 bg-emerald-900 text-white font-bold rounded-xl hover:bg-gold-light hover:text-emerald-900 transition-all shadow-xl hover:-translate-y-1 uppercase tracking-widest">Gửi yêu cầu báo giá ngay</button>
-                </form>
-                <div id="success-msg" class="hidden text-center py-10">
-                    <div class="text-6xl mb-4">✅</div>
-                    <h4 class="text-2xl font-serif font-bold text-emerald-900">Gửi Thành Công!</h4>
-                    <p class="text-slate-500">Chuyên viên tư vấn Ansana by Kita sẽ liên hệ quý khách ngay.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-emerald-950 text-slate-400 py-20 border-t border-white/5">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 text-sm">
-            <div class="space-y-4">
-                <a href="https://ansana.bykita.vn/" class="text-2xl font-serif font-black text-white uppercase tracking-widest block">ANSANA BY KITA</a>
-                <p class="leading-relaxed">Hệ thống phân phối chính thức từ Kita Group. Cập nhật thông tin nhanh nhất, chuẩn xác nhất về dự án Kita Võ Văn Kiệt.</p>
-            </div>
-            <div>
-                <h5 class="text-white font-bold mb-6 text-xs uppercase tracking-widest">Khám Phá</h5>
-                <ul class="space-y-3">
-                    <li><a href="#overview" class="hover:text-amber-500">Tổng quan dự án</a></li>
-                    <li><a href="#perspective" class="hover:text-amber-500">Phối cảnh hạ tầng</a></li>
-                    <li><a href="#amenities" class="hover:text-amber-500">Tiện ích đặc quyền</a></li>
-                    <li><a href="#video-presentation" class="hover:text-amber-500">Video giới thiệu</a></li>
-                    <li><a href="#price" class="hover:text-amber-500">Bảng giá 2026</a></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="text-white font-bold mb-6 text-xs uppercase tracking-widest">Văn Phòng Dự Án</h5>
-                <ul class="space-y-3">
-                    <li id="footer-address"></li>
-                    <li id="footer-hotline"></li>
-                    <li id="footer-web"></li>
-                </ul>
-            </div>
-            <div>
-                <h5 class="text-white font-bold mb-6 text-xs uppercase tracking-widest">Đối Tác Chiến Lược</h5>
-                <ul class="space-y-3">
-                    <li>Chủ đầu tư: <strong>Kita Group</strong></li>
-                    <li>Xây dựng: <strong>Newtecons</strong></li>
-                    <li>Quản lý: <strong>Wellness Management</strong></li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 mt-20 pt-8 border-t border-white/10 text-center text-[10px] uppercase tracking-widest">
-            © 2026 Copyright by <a href="https://ansana.bykita.vn/" class="hover:text-white">Ansana By Kita</a>.
-        </div>
-    </footer>
-
-    <!-- MOBILE STICKY -->
-    <div class="fixed bottom-0 left-0 right-0 z-50 flex md:hidden bg-white border-t border-slate-100 shadow-2xl">
-        <a id="sticky-hotline" class="flex-1 py-4 bg-emerald-900 text-white font-bold text-center flex items-center justify-center space-x-2 border-r border-white/10">
-            <span class="text-sm uppercase tracking-wide">📞 Gọi tư vấn</span>
-        </a>
-        <a id="sticky-zalo" class="flex-1 py-4 bg-blue-600 text-white font-bold text-center flex items-center justify-center space-x-2">
-            <span class="text-sm uppercase tracking-wide">💬 Nhận Zalo</span>
-        </a>
-    </div>
-
-    <!-- MAIN JAVASCRIPT -->
-    <script>
-        const PROJECT_DATA = {
-            name: "Ansana by KITA",
-            brand: "Kita Võ Văn Kiệt",
-            hotline: "0859 166 188",
-            hotline_val: "0859166188",
-            address: "69-79-89 Võ Văn Kiệt, P. An Lạc, Q. Bình Tân, TP.HCM",
-            website: "ansana.bykita.vn",
-            domain: "https://ansana.bykita.vn",
-            coords: "10.724452, 106.616846",
-            youtube_id: "dQw4w9WgXcQ", // Placeholder - Replace with actual project video ID
-            policy: "Ưu đãi chiết khấu 15% + Ân hạn nợ gốc 24 tháng dành riêng cho 50 suất ngoại giao đầu tiên",
-            gas_url: "https://script.google.com/macros/s/AKfycby_XXXXXXXXXXXX/exec",
-            types: [
-                { label: "Căn hộ 1PN Luxury", price: "Từ 3.6 Tỷ", size: "40 - 57m²" },
-                { label: "Căn hộ 2PN Wellness", price: "Từ 5.5 Tỷ", size: "62 - 88m²" },
-                { label: "Căn hộ 3PN Premium", price: "Từ 8 Tỷ", size: "89 - 115m²" }
-            ]
-        };
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Hotline update
-            const navHotline = document.getElementById('data-hotline-nav');
-            navHotline.innerText = PROJECT_DATA.hotline;
-            navHotline.href = `tel:${PROJECT_DATA.hotline_val}`;
-
-            // Price cards
-            const priceBox = document.getElementById('price-cards');
-            priceBox.innerHTML = PROJECT_DATA.types.map(item => `
-                <div class="p-8 bg-slate-50 border border-slate-100 rounded-2xl hover:bg-white hover:shadow-2xl transition-all hover:-translate-y-2 group">
-                    <h4 class="text-xl font-serif font-bold text-amber-600 mb-2">${item.label}</h4>
-                    <div class="text-3xl font-serif font-bold text-emerald-900 mb-4">${item.price}</div>
-                    <p class="text-sm text-slate-500">Diện tích: ${item.size}</p>
-                    <div class="mt-6 pt-6 border-t border-slate-200 flex justify-between items-center">
-                        <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Sổ hồng mẫu</span>
-                        <span class="text-emerald-900 font-bold uppercase text-xs">CÓ SẴN</span>
-                    </div>
-                </div>
-            `).join('');
-
-            // Policy update
-            document.getElementById('data-policy').innerText = `"${PROJECT_DATA.policy}"`;
-
-            // Footer update
-            document.getElementById('footer-address').innerHTML = `<strong>Địa chỉ:</strong> ${PROJECT_DATA.address}`;
-            document.getElementById('footer-hotline').innerHTML = `<strong>Hotline:</strong> <a href="tel:${PROJECT_DATA.hotline_val}" class="hover:text-white transition-colors">${PROJECT_DATA.hotline}</a>`;
-            document.getElementById('footer-web').innerHTML = `<strong>Website:</strong> <a href="${PROJECT_DATA.domain}" class="hover:text-white transition-colors">${PROJECT_DATA.website}</a>`;
-
-            // Mobile sticky
-            document.getElementById('sticky-hotline').href = `tel:${PROJECT_DATA.hotline_val}`;
-            document.getElementById('sticky-zalo').href = `https://zalo.me/${PROJECT_DATA.hotline_val}`;
-
-            // Video Handler
-            const videoPlaceholder = document.getElementById('video-placeholder');
-            const videoFrameContainer = document.getElementById('video-frame-container');
-            const youtubeIframe = document.getElementById('youtube-iframe');
-
-            videoPlaceholder.addEventListener('click', () => {
-                youtubeIframe.src = `https://www.youtube.com/embed/${PROJECT_DATA.youtube_id}?autoplay=1`;
-                videoFrameContainer.classList.remove('hidden');
-                videoPlaceholder.classList.add('hidden');
-            });
-
-            // Reveal scroll
-            const reveals = document.querySelectorAll('.reveal');
-            const windowHeight = window.innerHeight;
-            const revealFunc = () => {
-                reveals.forEach(r => {
-                    const top = r.getBoundingClientRect().top;
-                    if (top < windowHeight - 100) r.classList.add('active');
-                });
-            };
-            window.addEventListener('scroll', revealFunc);
-            revealFunc();
-
-            // Form handler
-            const form = document.getElementById('lead-form');
-            const successMsg = document.getElementById('success-msg');
-            const submitBtn = document.getElementById('submit-btn');
-
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData.entries());
-
-                const phoneRegex = /^(0|84)([0-9]{9})$/;
-                if (!phoneRegex.test(data.phone.replace(/\s/g, ''))) {
-                    alert('Số điện thoại không hợp lệ. Quý khách vui lòng nhập đúng 10 số để nhận bảng giá.');
-                    return;
-                }
-
-                submitBtn.innerText = "ĐANG GỬI YÊU CẦU...";
-                submitBtn.disabled = true;
-
-                try {
-                    await fetch(PROJECT_DATA.gas_url, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ ...data, source: PROJECT_DATA.website, timestamp: new Date().toLocaleString() })
-                    });
-                    
-                    form.classList.add('hidden');
-                    successMsg.classList.remove('hidden');
-                } catch (err) {
-                    console.error(err);
-                    alert('Lỗi kết nối. Quý khách vui lòng gọi hotline để nhận hỗ trợ nhanh nhất.');
-                    submitBtn.innerText = "GỬI LẠI YÊU CẦU";
-                    submitBtn.disabled = false;
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                    <div class="node" style="top: -10%; left: 50%; transform: translateX(-50%);">
+                        <div class="node-img"><img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=200" alt="Bến xe Miền Tây"></div>
